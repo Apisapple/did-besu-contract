@@ -24,6 +24,9 @@ contract DocumentStorage is Initializable, OwnableUpgradeable {
         string id,
         DocumentLibrary.DIDDOC_STATUS status
     );
+    event OpenDIDAccessSet(address openDIDAddress);
+
+    address private _openDIDAddress;
 
     /// @custom:storage-location erc7201:openDID.storage.DocumentStorage
     struct Storage {
@@ -37,6 +40,27 @@ contract DocumentStorage is Initializable, OwnableUpgradeable {
 
     constructor() {
         _disableInitializers();
+    }
+
+    modifier onlyOpenDID() {
+        require(msg.sender == _openDIDAddress, "DocumentStorage: Caller is not OpenDID");
+        _;
+    }
+
+    /**
+     * @notice Set OpenDID contract address (one-time)
+     */
+    function setOpenDIDAddress(address openDIDAddress) external {
+        require(openDIDAddress != address(0), "DocumentStorage: Invalid OpenDID address");
+        require(_openDIDAddress == address(0), "DocumentStorage: OpenDID already set");
+        require(msg.sender == openDIDAddress, "DocumentStorage: Caller mismatch");
+
+        _openDIDAddress = openDIDAddress;
+        emit OpenDIDAccessSet(openDIDAddress);
+    }
+
+    function getOpenDIDAddress() external view returns (address) {
+        return _openDIDAddress;
     }
 
     /**
@@ -74,8 +98,10 @@ contract DocumentStorage is Initializable, OwnableUpgradeable {
     function registerDocument(
         DocumentLibrary.Document calldata _document,
         address _controller
-    ) external returns (bool) {
+    ) external onlyOpenDID returns (bool) {
         Storage storage store = _getStorage();
+
+        require(_controller != address(0), "DocumentStorage: Controller cannot be zero address");
 
         // Store the document with its ID
         store._doc[_document.id] = _document;
@@ -208,7 +234,7 @@ contract DocumentStorage is Initializable, OwnableUpgradeable {
         DocumentLibrary.Document calldata _updatedDocument,
         string calldata _did,
         string calldata _versionId
-    ) external {
+    ) external onlyOpenDID {
         Storage storage store = _getStorage();
 
         // Get latest document
@@ -237,7 +263,7 @@ contract DocumentStorage is Initializable, OwnableUpgradeable {
      * @notice Remove a document
      * @param _did The document ID
      */
-    function removeDocument(string calldata _did) external {
+    function removeDocument(string calldata _did) external onlyOpenDID {
         Storage storage store = _getStorage();
         delete store._doc[_did];
         emit DocumentRemoved(_did);
@@ -251,7 +277,7 @@ contract DocumentStorage is Initializable, OwnableUpgradeable {
     function updateDocumentStatus(
         DocumentLibrary.DocumentStatus calldata _documentStatus,
         string calldata _did
-    ) external {
+    ) external onlyOpenDID {
         Storage storage store = _getStorage();
         store._docStatus[_did] = _documentStatus;
         emit DocumentStatusUpdated(_did, _documentStatus.status);

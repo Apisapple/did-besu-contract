@@ -56,5 +56,14 @@ library VerifySignatureLibrary {
             s := mload(add(sig, 0x40))
             v := byte(0, mload(add(sig, 0x60)))
         }
+
+        require(v == 27 || v == 28, "Invalid signature v value");
+
+        uint256 sValue = uint256(s);
+        require(
+            sValue <=
+                0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0,
+            "Invalid signature s value"
+        );
     }
 }

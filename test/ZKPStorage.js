@@ -13,6 +13,7 @@ describe("ZKPStorage", function () {
 
         const ZKPStorage = await ethers.getContractFactory("ZKPStorage");
         const zkpStorage = await ZKPStorage.deploy();
+        await zkpStorage.setOpenDIDAddress(owner.address);
 
         return { zkpStorage, owner, otherAccount };
     }

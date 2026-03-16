@@ -83,6 +83,10 @@ contract OpenDID is Initializable, UUPSUpgradeable, AccessControl {
         zkpStorage = ZKPStorage(_zkpStorage);
         multibaseContract = MultibaseContract(_multibaseContract);
 
+        documentStorage.setOpenDIDAddress(address(this));
+        vcMetaStorage.setOpenDIDAddress(address(this));
+        zkpStorage.setOpenDIDAddress(address(this));
+
         emit Setup();
     }
 

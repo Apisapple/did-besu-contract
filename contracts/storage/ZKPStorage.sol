@@ -15,9 +15,34 @@ contract ZKPStorage is Initializable {
 
     /// @notice Emitted when the ZKPStorage contract is initialized
     event ZKPStorageSetup();
+    /// @notice Emitted when OpenDID access is configured
+    event OpenDIDAccessSet(address openDIDAddress);
+
+    address private _openDIDAddress;
 
     constructor() {
         _disableInitializers();
+    }
+
+    modifier onlyOpenDID() {
+        require(msg.sender == _openDIDAddress, "ZKPStorage: Caller is not OpenDID");
+        _;
+    }
+
+    /**
+     * @notice Set OpenDID contract address (one-time)
+     */
+    function setOpenDIDAddress(address openDIDAddress) external {
+        require(openDIDAddress != address(0), "ZKPStorage: Invalid OpenDID address");
+        require(_openDIDAddress == address(0), "ZKPStorage: OpenDID already set");
+        require(msg.sender == openDIDAddress, "ZKPStorage: Caller mismatch");
+
+        _openDIDAddress = openDIDAddress;
+        emit OpenDIDAccessSet(openDIDAddress);
+    }
+
+    function getOpenDIDAddress() external view returns (address) {
+        return _openDIDAddress;
     }
 
     /**
@@ -58,7 +83,7 @@ contract ZKPStorage is Initializable {
      */
     function registerCredentialDefinition(
         ZKPLibrary.CredentialDefinition calldata _credentialDefinition
-    ) external {
+    ) external onlyOpenDID {
         Storage storage store = _getStorage();
         store._credentialDefinitions[
             _credentialDefinition.id
@@ -83,7 +108,7 @@ contract ZKPStorage is Initializable {
      */
     function removeCredentialDefinition(
         string calldata _credentialDefinitionId
-    ) external {
+    ) external onlyOpenDID {
         Storage storage store = _getStorage();
         delete store._credentialDefinitions[_credentialDefinitionId];
     }
@@ -94,7 +119,7 @@ contract ZKPStorage is Initializable {
      */
     function registerSchema(
         ZKPLibrary.CredentialSchema calldata _schema
-    ) external {
+    ) external onlyOpenDID {
         Storage storage store = _getStorage();
         store._credentialSchemas[_schema.id] = _schema;
     }
@@ -115,7 +140,7 @@ contract ZKPStorage is Initializable {
      * @notice Remove a credential schema by ID
      * @param _schemaId The credential schema ID
      */
-    function removeSchema(string calldata _schemaId) external {
+    function removeSchema(string calldata _schemaId) external onlyOpenDID {
         Storage storage store = _getStorage();
         delete store._credentialSchemas[_schemaId];
     }

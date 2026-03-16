@@ -14,6 +14,7 @@ describe("VcMetaStorage", function () {
 
         const VcMetaStorage = await ethers.getContractFactory("VcMetaStorage");
         const vcMetaStorage = await VcMetaStorage.deploy();
+        await vcMetaStorage.setOpenDIDAddress(owner.address);
 
         return { vcMetaStorage, owner, otherAccount };
     }

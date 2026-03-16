@@ -14,6 +14,7 @@ describe("DocumentStorage", function () {
 
         const DocumentStorage = await ethers.getContractFactory("DocumentStorage");
         const documentStorage = await DocumentStorage.deploy();
+        await documentStorage.setOpenDIDAddress(owner.address);
 
         return { documentStorage, owner, otherAccount };
     }
