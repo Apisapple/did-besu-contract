@@ -19,6 +19,9 @@ module.exports = {
     allowUnlimitedContractSize: true,
   },
   networks: {
+    hardhat: {
+      allowUnlimitedContractSize: true,
+    },
     dev: {
       url: "http://10.48.17.200:50010",
       gasPrice: 0,
