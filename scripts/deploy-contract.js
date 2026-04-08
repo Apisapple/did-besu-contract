@@ -1,4 +1,10 @@
-const { ethers, upgrades, config } = require("hardhat");
+const { ethers } = require("hardhat");
+
+function getSelectors(contract) {
+    return contract.interface.fragments
+        .filter((f) => f.type === "function")
+        .map((f) => contract.interface.getFunction(f.name).selector);
+}
 
 async function deployContract() {
     try {
@@ -30,29 +36,62 @@ async function deployContract() {
         const multibaseContractAddress = await multibaseContract.getAddress();
         console.log("MultibaseContract deployed to:", multibaseContractAddress);
 
-        const OpenDID = await ethers.getContractFactory(
-            "OpenDID",
-        );
+        const DiamondCutFacet = await ethers.getContractFactory("DiamondCutFacet");
+        const diamondCutFacet = await DiamondCutFacet.deploy();
+        await diamondCutFacet.waitForDeployment();
 
-        const openDIDProxy = await upgrades.deployProxy(OpenDID, [
+        const Diamond = await ethers.getContractFactory("Diamond");
+        const [owner] = await ethers.getSigners();
+        const diamond = await Diamond.deploy(
+            owner.address,
+            await diamondCutFacet.getAddress(),
+        );
+        await diamond.waitForDeployment();
+
+        const diamondAddress = await diamond.getAddress();
+
+        const diamondCut = await ethers.getContractAt("IDiamondCut", diamondAddress);
+
+        const facetNames = [
+            "DiamondLoupeFacet",
+            "OwnershipFacet",
+            "OpenDIDAdminFacet",
+            "OpenDIDDidFacet",
+            "OpenDIDVcFacet",
+            "OpenDIDZKPFacet",
+        ];
+
+        const cut = [];
+        for (const facetName of facetNames) {
+            const Facet = await ethers.getContractFactory(facetName);
+            const facet = await Facet.deploy();
+            await facet.waitForDeployment();
+
+            cut.push({
+                facetAddress: await facet.getAddress(),
+                action: 0,
+                functionSelectors: getSelectors(facet),
+            });
+        }
+
+        const OpenDIDInit = await ethers.getContractFactory("OpenDIDInit");
+        const openDIDInit = await OpenDIDInit.deploy();
+        await openDIDInit.waitForDeployment();
+
+        const initCalldata = openDIDInit.interface.encodeFunctionData("init", [
             documentStorageAddress,
             vcMetaStorageAddress,
             zkpStorageAddress,
             multibaseContractAddress,
-        ], {
-            kind: "uups",
-        });
+            owner.address,
+        ]);
 
-        await openDIDProxy.waitForDeployment();
+        const tx = await diamondCut.diamondCut(cut, await openDIDInit.getAddress(), initCalldata);
+        await tx.wait();
 
-        const contractAddress = await openDIDProxy.getAddress();
-        console.log("OpenDID deployed to:", contractAddress);
+        console.log("OpenDID Diamond deployed to:", diamondAddress);
 
-        const implementationAddress =
-            await upgrades.erc1967.getImplementationAddress(contractAddress);
-        console.log("Implementation address:", implementationAddress);
-
-        return { proxy: contractAddress, implementation: implementationAddress };
+        return { diamond: diamondAddress };
     } catch (error) {
         console.error("Deployment failed:", error);
         throw error;

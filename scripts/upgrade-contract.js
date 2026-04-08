@@ -1,12 +1,36 @@
-const { ethers, upgrades, config } = require("hardhat");
+const { ethers } = require("hardhat");
 
-const UPGRADEABLE_PROXY = "0x834aDe89F14B5A724cD4beE5c5B5883c65ae46ba";
+const DIAMOND_ADDRESS = process.env.DIAMOND_ADDRESS;
 
+function getSelectors(contract) {
+    return contract.interface.fragments
+        .filter((f) => f.type === "function")
+        .map((f) => contract.interface.getFunction(f.name).selector);
+}
 
 async function upgradeContract() {
-    const Enterprise = await ethers.getContractFactory("Enterprise");
-    let enterpriseProxy = await upgrades.upgradeProxy(UPGRADEABLE_PROXY, Enterprise);
-    console.log("V2 Contract Deployed to:", enterpriseProxy.address);
+    if (!DIAMOND_ADDRESS) {
+        throw new Error("DIAMOND_ADDRESS environment variable is required");
+    }
+
+    const NewOpenDIDVcFacet = await ethers.getContractFactory("OpenDIDVcFacet");
+    const newOpenDIDVcFacet = await NewOpenDIDVcFacet.deploy();
+    await newOpenDIDVcFacet.waitForDeployment();
+
+    const diamondCut = await ethers.getContractAt("IDiamondCut", DIAMOND_ADDRESS);
+
+    const cut = [
+        {
+            facetAddress: await newOpenDIDVcFacet.getAddress(),
+            action: 1,
+            functionSelectors: getSelectors(newOpenDIDVcFacet),
+        },
+    ];
+
+    const tx = await diamondCut.diamondCut(cut, ethers.ZeroAddress, "0x");
+    await tx.wait();
+
+    console.log("Facet replaced on diamond:", DIAMOND_ADDRESS);
 }
 
 async function main() {

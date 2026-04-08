@@ -1,6 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomicfoundation/hardhat-ethers");
-require("@openzeppelin/hardhat-upgrades");
 const path = require("path");
 const fs = require("fs");
 const { task } = require("hardhat/config");

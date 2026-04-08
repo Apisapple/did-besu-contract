@@ -1,12 +1,36 @@
 const { expect } = require("chai");
-const { ethers, upgrades } = require("hardhat");
+const { ethers } = require("hardhat");
 const { getLocalJson } = require("./Utils");
-const { opendir } = require("graceful-fs");
+
+function getSelectors(contract) {
+  return contract.interface.fragments
+    .filter((f) => f.type === "function")
+    .map((f) => contract.interface.getFunction(f.name).selector);
+}
+
+function uniqueAbi(contracts) {
+  const abi = [];
+  const seen = new Set();
+
+  for (const contract of contracts) {
+    for (const fragment of contract.interface.fragments) {
+      if (fragment.type === "function" || fragment.type === "event") {
+        const key = fragment.format("full");
+        if (!seen.has(key)) {
+          seen.add(key);
+          abi.push(fragment);
+        }
+      }
+    }
+  }
+
+  return abi;
+}
 
 describe("OpenDID Contract", function () {
   this.timeout(50000);
 
-  let openDID, owner, addr1;
+  let openDID, owner, addr1, diamondAddress;
 
   beforeEach(async () => {
     [owner, addr1] = await ethers.getSigners();
@@ -29,10 +53,59 @@ describe("OpenDID Contract", function () {
     const zkpStorageAddress = await zkpStorage.getAddress();
     const multibaseContractAddress = await multibaseContract.getAddress();
 
-    // OpenDID 배포
-    const OpenDIDFactory = await ethers.getContractFactory("OpenDID");
-    openDID = await upgrades.deployProxy(OpenDIDFactory, [documentStorageAddress, vcMetaStorageAddress, zkpStorageAddress, multibaseContractAddress], { kind: "uups" });
-    await openDID.waitForDeployment();
+    const DiamondCutFacet = await ethers.getContractFactory("DiamondCutFacet");
+    const diamondCutFacet = await DiamondCutFacet.deploy();
+    await diamondCutFacet.waitForDeployment();
+
+    const Diamond = await ethers.getContractFactory("Diamond");
+    const diamond = await Diamond.deploy(owner.address, await diamondCutFacet.getAddress());
+    await diamond.waitForDeployment();
+    diamondAddress = await diamond.getAddress();
+
+    const diamondCut = await ethers.getContractAt("IDiamondCut", diamondAddress);
+
+    const facetNames = [
+      "DiamondLoupeFacet",
+      "OwnershipFacet",
+      "OpenDIDAdminFacet",
+      "OpenDIDDidFacet",
+      "OpenDIDVcFacet",
+      "OpenDIDZKPFacet",
+    ];
+
+    const cut = [];
+    const deployedFacets = [];
+
+    for (const facetName of facetNames) {
+      const Facet = await ethers.getContractFactory(facetName);
+      const facet = await Facet.deploy();
+      await facet.waitForDeployment();
+      deployedFacets.push(facet);
+
+      cut.push({
+        facetAddress: await facet.getAddress(),
+        action: 0,
+        functionSelectors: getSelectors(facet),
+      });
+    }
+
+    const OpenDIDInit = await ethers.getContractFactory("OpenDIDInit");
+    const openDIDInit = await OpenDIDInit.deploy();
+    await openDIDInit.waitForDeployment();
+
+    const initCalldata = openDIDInit.interface.encodeFunctionData("init", [
+      documentStorageAddress,
+      vcMetaStorageAddress,
+      zkpStorageAddress,
+      multibaseContractAddress,
+      owner.address,
+    ]);
+
+    const tx = await diamondCut.diamondCut(cut, await openDIDInit.getAddress(), initCalldata);
+    await tx.wait();
+
+    const mergedAbi = uniqueAbi(deployedFacets);
+    openDID = new ethers.Contract(diamondAddress, mergedAbi, owner);
   });
 
   it("should initialize the OpenDID contract", async () => {
@@ -209,10 +282,8 @@ describe("OpenDID Contract", function () {
     ).to.be.revertedWith("Role type cannot be empty");
   });
 
-  it("should only allow ADMIN to upgrade contract", async () => {
-    const OpenDIDFactory = await ethers.getContractFactory("OpenDID");
-    await expect(
-      upgrades.upgradeProxy(openDID, OpenDIDFactory.connect(addr1))
-    ).to.be.revertedWithCustomError(openDID, "AccessControlUnauthorizedAccount");
+  it("should expose diamond owner", async () => {
+    const ownership = await ethers.getContractAt("OwnershipFacet", diamondAddress);
+    expect(await ownership.owner()).to.equal(owner.address);
   });
 });
