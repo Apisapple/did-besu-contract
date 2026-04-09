@@ -35,24 +35,6 @@ describe("OpenDID Contract", function () {
   beforeEach(async () => {
     [owner, addr1] = await ethers.getSigners();
 
-    // DocumentStorage 배포
-    const DocumentStorage = await ethers.getContractFactory("DocumentStorage");
-    const documentStorage = await DocumentStorage.deploy();
-
-    const VcMetaStorage = await ethers.getContractFactory("VcMetaStorage");
-    const vcMetaStorage = await VcMetaStorage.deploy();
-
-    const ZKPStorage = await ethers.getContractFactory("ZKPStorage");
-    const zkpStorage = await ZKPStorage.deploy();
-
-    const MultibaseContract = await ethers.getContractFactory("MultibaseContract");
-    const multibaseContract = await MultibaseContract.deploy();
-
-    const documentStorageAddress = await documentStorage.getAddress();
-    const vcMetaStorageAddress = await vcMetaStorage.getAddress();
-    const zkpStorageAddress = await zkpStorage.getAddress();
-    const multibaseContractAddress = await multibaseContract.getAddress();
-
     const DiamondCutFacet = await ethers.getContractFactory("DiamondCutFacet");
     const diamondCutFacet = await DiamondCutFacet.deploy();
     await diamondCutFacet.waitForDeployment();
@@ -68,7 +50,8 @@ describe("OpenDID Contract", function () {
       "DiamondLoupeFacet",
       "OwnershipFacet",
       "OpenDIDAdminFacet",
-      "OpenDIDDidFacet",
+      "OpenDIDDidDocFacet",
+      "OpenDIDDidStatusFacet",
       "OpenDIDVcFacet",
       "OpenDIDZKPFacet",
     ];
@@ -94,10 +77,6 @@ describe("OpenDID Contract", function () {
     await openDIDInit.waitForDeployment();
 
     const initCalldata = openDIDInit.interface.encodeFunctionData("init", [
-      documentStorageAddress,
-      vcMetaStorageAddress,
-      zkpStorageAddress,
-      multibaseContractAddress,
       owner.address,
     ]);
 
@@ -195,31 +174,6 @@ describe("OpenDID Contract", function () {
     const storedVcSchema = await openDID.getVcSchema(vcSchema.id);
     expect(storedVcSchema.id).to.equal(vcSchema.id);
     expect(storedVcSchema.schema).to.equal(vcSchema.schema);
-  });
-
-  it("should allow only ADMIN to set DocumentStorage address", async () => {
-    const DocumentStorage = await ethers.getContractFactory("DocumentStorage");
-    const newStorage = await DocumentStorage.deploy();
-    const newStorageAddress = await newStorage.getAddress();
-
-    // ADMIN(owner) 가능
-    await expect(openDID.setDocumentStorage(newStorageAddress)).to.not.be.reverted;
-  });
-
-  it("should allow only ADMIN to set VcMetaStorage address", async () => {
-    const VcMetaStorage = await ethers.getContractFactory("VcMetaStorage");
-    const newStorage = await VcMetaStorage.deploy();
-    const newStorageAddress = await newStorage.getAddress();
-
-    await expect(openDID.setVcMetaStorage(newStorageAddress)).to.not.be.reverted;
-  });
-
-  it("should allow only ADMIN to set ZKPStorage address", async () => {
-    const ZKPStorage = await ethers.getContractFactory("ZKPStorage");
-    const newStorage = await ZKPStorage.deploy();
-    const newStorageAddress = await newStorage.getAddress();
-
-    await expect(openDID.setZKPStorage(newStorageAddress)).to.not.be.reverted;
   });
 
   it("should only allow ISSUER to register and get ZKP credential schema", async () => {

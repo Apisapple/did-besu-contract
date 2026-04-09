@@ -10,44 +10,26 @@ contract OpenDIDZKPFacet {
         ZKPLibrary.CredentialSchema calldata _credentialSchema
     ) public {
         _validateIssuerRole();
-        LibAppStorage.appStorage().zkpStorage.registerSchema(_credentialSchema);
+        LibAppStorage.appStorage()._credentialSchemas[_credentialSchema.id] = _credentialSchema;
     }
 
     function getZKPCredential(
         string calldata _id
     ) public view returns (ZKPLibrary.CredentialSchema memory) {
-        try LibAppStorage.appStorage().zkpStorage.getSchema(_id) returns (
-            ZKPLibrary.CredentialSchema memory credentialSchema
-        ) {
-            return credentialSchema;
-        } catch Error(string memory reason) {
-            revert(reason);
-        } catch {
-            revert("Unknown error occurred during ZKP credential retrieval");
-        }
+        return LibAppStorage.appStorage()._credentialSchemas[_id];
     }
 
     function registZKPCredentialDefinition(
         ZKPLibrary.CredentialDefinition calldata _credentialDefinition
     ) public {
         _validateIssuerRole();
-        LibAppStorage.appStorage().zkpStorage.registerCredentialDefinition(
-            _credentialDefinition
-        );
+        LibAppStorage.appStorage()._credentialDefinitions[_credentialDefinition.id] = _credentialDefinition;
     }
 
     function getZKPCredentialDefinition(
         string calldata _id
     ) public view returns (ZKPLibrary.CredentialDefinition memory) {
-        try LibAppStorage.appStorage().zkpStorage.getCredentialDefinition(_id) returns (
-            ZKPLibrary.CredentialDefinition memory credentialDefinition
-        ) {
-            return credentialDefinition;
-        } catch Error(string memory reason) {
-            revert(reason);
-        } catch {
-            revert("Unknown error occurred during ZKP credential definition retrieval");
-        }
+        return LibAppStorage.appStorage()._credentialDefinitions[_id];
     }
 
     function _validateIssuerRole() internal view {

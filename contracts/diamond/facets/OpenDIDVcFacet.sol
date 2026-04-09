@@ -13,27 +13,25 @@ contract OpenDIDVcFacet {
 
     function registVcMetaData(VcMetaLibrary.VcMeta calldata _vcMeta) public {
         _validateTasOrIssuerRole();
-        LibAppStorage.appStorage().vcMetaStorage.registerVcMeta(_vcMeta);
+        require(bytes(_vcMeta.id).length > 0, "VcMetaStorage: ID of vcmeta cannot be empty");
+        LibAppStorage.appStorage()._vcMeta[_vcMeta.id] = _vcMeta;
         emit VCIssued(_vcMeta.id, msg.sender, _vcMeta.issuer.did);
     }
 
     function getVcmetaData(
         string calldata _id
     ) public view returns (VcMetaLibrary.VcMeta memory) {
-        try LibAppStorage.appStorage().vcMetaStorage.getVcMeta(_id) returns (
-            VcMetaLibrary.VcMeta memory vcMeta
-        ) {
-            return vcMeta;
-        } catch Error(string memory reason) {
-            revert(reason);
-        } catch {
-            revert("Unknown error occurred during VC metadata retrieval");
-        }
+        require(bytes(_id).length > 0, "VcMetaStorage: ID of vcmeta cannot be empty");
+        LibAppStorage.AppStorage storage s = LibAppStorage.appStorage();
+        require(bytes(s._vcMeta[_id].id).length > 0, "VcMetaStorage: VcMeta does not exist");
+        return s._vcMeta[_id];
     }
 
     function updateVcStats(string calldata _vcId, string calldata _status) public {
         _validateTasOrIssuerRole();
-        LibAppStorage.appStorage().vcMetaStorage.updateVcMetaStatus(_vcId, _status);
+        LibAppStorage.AppStorage storage s = LibAppStorage.appStorage();
+        VcMetaLibrary.VcMeta storage vcMeta = s._vcMeta[_vcId];
+        VcMetaLibrary.updateVcStatus(vcMeta, _status);
         emit VCStatus(_vcId, msg.sender, _status);
     }
 
@@ -46,22 +44,17 @@ contract OpenDIDVcFacet {
 
         _validateTasOrIssuerRole();
 
-        LibAppStorage.appStorage().vcMetaStorage.registerVcSchema(_vcSchema);
+        LibAppStorage.appStorage()._vcSchemas[_vcSchema.id] = _vcSchema;
         emit VCSchemaCreated(_vcSchema.id, msg.sender);
     }
 
     function getVcSchema(
         string calldata _id
     ) public view returns (VcSchemaMetaLibrary.VcSchema memory) {
-        try LibAppStorage.appStorage().vcMetaStorage.getVcSchema(_id) returns (
-            VcSchemaMetaLibrary.VcSchema memory vcSchema
-        ) {
-            return vcSchema;
-        } catch Error(string memory reason) {
-            revert(reason);
-        } catch {
-            revert("Unknown error occurred during VC schema retrieval");
-        }
+        require(bytes(_id).length > 0, "VcMetaStorage: ID of vcschema cannot be empty");
+        LibAppStorage.AppStorage storage s = LibAppStorage.appStorage();
+        require(bytes(s._vcSchemas[_id].id).length > 0, "VcMetaStorage: VcSchema does not exist");
+        return s._vcSchemas[_id];
     }
 
     function _validateTasOrIssuerRole() internal view {

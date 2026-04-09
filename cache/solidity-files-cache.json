@@ -1,10 +1,47 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/workspaces/did-besu-contract/contracts/data/ZKPLibrary.sol": {
-      "lastModificationDate": 1770194366819,
-      "contentHash": "f63c2f12d294666c0b2c009fabcf9efb",
-      "sourceName": "contracts/data/ZKPLibrary.sol",
+    "/workspaces/did-besu-contract/contracts/crypto/MultibaseContract.sol": {
+      "lastModificationDate": 1775573511757,
+      "contentHash": "19939446f97097fec0b4bdc811d37e6c",
+      "sourceName": "contracts/crypto/MultibaseContract.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "MultibaseContract"
+      ]
+    },
+    "/workspaces/did-besu-contract/contracts/data/CredentialSchemaLibrary.sol": {
+      "lastModificationDate": 1775573511757,
+      "contentHash": "ea70024a0c3b30692d11b863b57b501c",
+      "sourceName": "contracts/data/CredentialSchemaLibrary.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -35,11 +72,11 @@
         "^0.8.27"
       ],
       "artifacts": [
-        "ZKPLibrary"
+        "CredentialSchemaLibrary"
       ]
     },
     "/workspaces/did-besu-contract/contracts/data/VcMetaLibrary.sol": {
-      "lastModificationDate": 1770194366818,
+      "lastModificationDate": 1775573511757,
       "contentHash": "14cc6079ce49870b71a89c6e0dab47eb",
       "sourceName": "contracts/data/VcMetaLibrary.sol",
       "solcConfig": {
@@ -78,8 +115,87 @@
         "VcMetaLibrary"
       ]
     },
+    "/workspaces/did-besu-contract/contracts/data/ProviderLibrary.sol": {
+      "lastModificationDate": 1775573511757,
+      "contentHash": "463e7d91ff0d534b0a86fb0e899ab024",
+      "sourceName": "contracts/data/ProviderLibrary.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "ProviderLibrary"
+      ]
+    },
+    "/workspaces/did-besu-contract/contracts/diamond/libraries/LibAppStorage.sol": {
+      "lastModificationDate": 1775702161195,
+      "contentHash": "c54d81f11764832efca8e1f4da3c0355",
+      "sourceName": "contracts/diamond/libraries/LibAppStorage.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../data/DocumentLibrary.sol",
+        "../../data/VcMetaLibrary.sol",
+        "../../data/VcSchemaMetaLibrary.sol",
+        "../../data/ZKPLibrary.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "LibAppStorage"
+      ]
+    },
     "/workspaces/did-besu-contract/contracts/data/DocumentLibrary.sol": {
-      "lastModificationDate": 1770194366818,
+      "lastModificationDate": 1775573511757,
       "contentHash": "a4f4666f874f8ac30c8ce86bc87f7d14",
       "sourceName": "contracts/data/DocumentLibrary.sol",
       "solcConfig": {
@@ -118,50 +234,8 @@
         "DocumentLibrary"
       ]
     },
-    "/workspaces/did-besu-contract/contracts/storage/DocumentStorage.sol": {
-      "lastModificationDate": 1773652380952,
-      "contentHash": "663c572f1afa521719ba674971324e5a",
-      "sourceName": "contracts/storage/DocumentStorage.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
-        "../data/DocumentLibrary.sol",
-        "../utils/StringUtils.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "DocumentStorage"
-      ]
-    },
     "/workspaces/did-besu-contract/contracts/data/VcSchemaMetaLibrary.sol": {
-      "lastModificationDate": 1770194366819,
+      "lastModificationDate": 1775573511757,
       "contentHash": "9faed692af283e2f8e601ef81d28d27f",
       "sourceName": "contracts/data/VcSchemaMetaLibrary.sol",
       "solcConfig": {
@@ -197,51 +271,10 @@
         "VcSchemaMetaLibrary"
       ]
     },
-    "/workspaces/did-besu-contract/contracts/storage/VcMetaStorage.sol": {
-      "lastModificationDate": 1773652380952,
-      "contentHash": "9277336b4f23ffaf3b1d276201b05b07",
-      "sourceName": "contracts/storage/VcMetaStorage.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "../data/VcMetaLibrary.sol",
-        "../data/VcSchemaMetaLibrary.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "VcMetaStorage"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/data/RoleLibrary.sol": {
-      "lastModificationDate": 1770194366818,
-      "contentHash": "99f1267a6dfe1e2693523896ecd02d46",
-      "sourceName": "contracts/data/RoleLibrary.sol",
+    "/workspaces/did-besu-contract/contracts/data/ZKPLibrary.sol": {
+      "lastModificationDate": 1775573511757,
+      "contentHash": "f63c2f12d294666c0b2c009fabcf9efb",
+      "sourceName": "contracts/data/ZKPLibrary.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -272,326 +305,11 @@
         "^0.8.27"
       ],
       "artifacts": [
-        "RoleLibrary"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/crypto/MultibaseContract.sol": {
-      "lastModificationDate": 1770194366818,
-      "contentHash": "19939446f97097fec0b4bdc811d37e6c",
-      "sourceName": "contracts/crypto/MultibaseContract.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "MultibaseContract"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/storage/ZKPStorage.sol": {
-      "lastModificationDate": 1773652380952,
-      "contentHash": "b514773e1e7741c0582714162c0d9fe4",
-      "sourceName": "contracts/storage/ZKPStorage.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "../data/ZKPLibrary.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "ZKPStorage"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/access/AccessControl.sol": {
-      "lastModificationDate": 1773650826083,
-      "contentHash": "4c80b7fdf559a9a348e832a57d072a0b",
-      "sourceName": "@openzeppelin/contracts/access/AccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IAccessControl.sol",
-        "../utils/Context.sol",
-        "../utils/introspection/ERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "AccessControl"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1773650826290,
-      "contentHash": "227a6eb2225701c12d9c959b758b6333",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC20.sol",
-        "./extensions/IERC20Metadata.sol",
-        "../../utils/Context.sol",
-        "../../interfaces/draft-IERC6093.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC20"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol": {
-      "lastModificationDate": 1773650826060,
-      "contentHash": "f0cedd674b4863ee90d1521a92ab82df",
-      "sourceName": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Initializable"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol": {
-      "lastModificationDate": 1773650826081,
-      "contentHash": "ac3b77dea52cfdb14498e0a306a34b01",
-      "sourceName": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/interfaces/draft-IERC1822.sol",
-        "@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol",
-        "./Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "UUPSUpgradeable"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/data/ProviderLibrary.sol": {
-      "lastModificationDate": 1770194366818,
-      "contentHash": "463e7d91ff0d534b0a86fb0e899ab024",
-      "sourceName": "contracts/data/ProviderLibrary.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "ProviderLibrary"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/data/CredentialSchemaLibrary.sol": {
-      "lastModificationDate": 1770194366818,
-      "contentHash": "ea70024a0c3b30692d11b863b57b501c",
-      "sourceName": "contracts/data/CredentialSchemaLibrary.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "CredentialSchemaLibrary"
+        "ZKPLibrary"
       ]
     },
     "/workspaces/did-besu-contract/contracts/data/ServiceLibrary.sol": {
-      "lastModificationDate": 1770194366818,
+      "lastModificationDate": 1775573511757,
       "contentHash": "7b8f9df6db825855d7fc48cffe419924",
       "sourceName": "contracts/data/ServiceLibrary.sol",
       "solcConfig": {
@@ -628,7 +346,7 @@
       ]
     },
     "/workspaces/did-besu-contract/contracts/data/VerificationMethodLibrary.sol": {
-      "lastModificationDate": 1770194366819,
+      "lastModificationDate": 1775573511757,
       "contentHash": "cd4283bb668dd72bd7648fc7949f4fd4",
       "sourceName": "contracts/data/VerificationMethodLibrary.sol",
       "solcConfig": {
@@ -664,869 +382,9 @@
         "VerificationMethodLibrary"
       ]
     },
-    "/workspaces/did-besu-contract/contracts/utils/StringUtils.sol": {
-      "lastModificationDate": 1770194366819,
-      "contentHash": "b1e91b31081a9a8f2e2b063d7e2f3041",
-      "sourceName": "contracts/utils/StringUtils.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "StringUtils"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol": {
-      "lastModificationDate": 1773650826071,
-      "contentHash": "77d30f3cd93f46b80b6f8f1ebc574ee4",
-      "sourceName": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../utils/ContextUpgradeable.sol",
-        "../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "OwnableUpgradeable"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol": {
-      "lastModificationDate": 1773650825853,
-      "contentHash": "c28aaa25d083a9a55bd9ec9e0b785122",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ContextUpgradeable"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1773650826141,
-      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
-      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Context"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1773650826269,
-      "contentHash": "7c03c1e37c3dc24eafb76dc2b8a5c3a6",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC165"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/access/IAccessControl.sol": {
-      "lastModificationDate": 1773650826412,
-      "contentHash": "6f7fac9fa0df6004375e18b7ff7edf4e",
-      "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IAccessControl"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1773650826443,
-      "contentHash": "bf0119eb2a570f219729ff38b6cd1df8",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC165"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1773650826187,
-      "contentHash": "267d92fe4de67b1bdb3302c08f387dbf",
-      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC1155Errors",
-        "IERC20Errors",
-        "IERC721Errors"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1773650826448,
-      "contentHash": "8f19f64d2adadf448840908bbaf431c8",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1773650826451,
-      "contentHash": "794db3115001aa372c79326fcfd44b1f",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC20Metadata"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/interfaces/draft-IERC1822.sol": {
-      "lastModificationDate": 1773650826181,
-      "contentHash": "64a2b7a96950f0641c477993f3029477",
-      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC1822.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC1822Proxiable"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol": {
-      "lastModificationDate": 1773650826280,
-      "contentHash": "c023a5b23ee35b40b3085e550ff3367f",
-      "sourceName": "@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../beacon/IBeacon.sol",
-        "../../interfaces/IERC1967.sol",
-        "../../utils/Address.sol",
-        "../../utils/StorageSlot.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "ERC1967Utils"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1773650826098,
-      "contentHash": "5b9a49c25d7edbc48ffcbd2c7e8a40ef",
-      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./Errors.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Address"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/interfaces/IERC1967.sol": {
-      "lastModificationDate": 1773650826445,
-      "contentHash": "4e17c826a54a8ee1a185449d4695d07d",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC1967.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC1967"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/proxy/beacon/IBeacon.sol": {
-      "lastModificationDate": 1773650826423,
-      "contentHash": "0a5c323fd908535580597848b8e550fb",
-      "sourceName": "@openzeppelin/contracts/proxy/beacon/IBeacon.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IBeacon"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
-      "lastModificationDate": 1773650826524,
-      "contentHash": "e656d64c4ce918f3d13030b91c935134",
-      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "StorageSlot"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/utils/Errors.sol": {
-      "lastModificationDate": 1773650826362,
-      "contentHash": "6b5eac2b85500c3012977849cfd633d8",
-      "sourceName": "@openzeppelin/contracts/utils/Errors.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Errors"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol": {
-      "lastModificationDate": 1773650826277,
-      "contentHash": "07e13052976ae13746455b10ebf3cff9",
-      "sourceName": "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../Proxy.sol",
-        "./ERC1967Utils.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "ERC1967Proxy"
-      ]
-    },
-    "/workspaces/did-besu-contract/node_modules/@openzeppelin/contracts/proxy/Proxy.sol": {
-      "lastModificationDate": 1773650826510,
-      "contentHash": "35308c2fa7be99a959494c37e8257c16",
-      "sourceName": "@openzeppelin/contracts/proxy/Proxy.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Proxy"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/utils/VerifySignatureLibrary.sol": {
-      "lastModificationDate": 1773652380953,
-      "contentHash": "7c7255bac0b5cf712fc19fcc1c129ba8",
-      "sourceName": "contracts/utils/VerifySignatureLibrary.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "VerifySignatureLibrary"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/diamond/facets/OpenDIDDidFacet.sol": {
-      "lastModificationDate": 1775611561376,
-      "contentHash": "91b975d1f9e7a2fc3d4fce4c12d8951b",
-      "sourceName": "contracts/diamond/facets/OpenDIDDidFacet.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../libraries/LibAppStorage.sol",
-        "../../data/DocumentLibrary.sol",
-        "../../data/RoleLibrary.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "OpenDIDDidFacet"
-      ]
-    },
-    "/workspaces/did-besu-contract/contracts/diamond/libraries/LibAppStorage.sol": {
-      "lastModificationDate": 1775611561372,
-      "contentHash": "83b5db598fa9a45942bf985973f34cae",
-      "sourceName": "contracts/diamond/libraries/LibAppStorage.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../storage/DocumentStorage.sol",
-        "../../storage/VcMetaStorage.sol",
-        "../../storage/ZKPStorage.sol",
-        "../../crypto/MultibaseContract.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "LibAppStorage"
-      ]
-    },
     "/workspaces/did-besu-contract/contracts/diamond/facets/OpenDIDZKPFacet.sol": {
-      "lastModificationDate": 1775611561376,
-      "contentHash": "19037692745f6cd0529fc0c00be086f7",
+      "lastModificationDate": 1775702155589,
+      "contentHash": "ef91b7c32ace528273cbd8c656c90916",
       "sourceName": "contracts/diamond/facets/OpenDIDZKPFacet.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -1565,9 +423,46 @@
         "OpenDIDZKPFacet"
       ]
     },
+    "/workspaces/did-besu-contract/contracts/data/RoleLibrary.sol": {
+      "lastModificationDate": 1775573511757,
+      "contentHash": "99f1267a6dfe1e2693523896ecd02d46",
+      "sourceName": "contracts/data/RoleLibrary.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "RoleLibrary"
+      ]
+    },
     "/workspaces/did-besu-contract/contracts/diamond/facets/OpenDIDVcFacet.sol": {
-      "lastModificationDate": 1775611561376,
-      "contentHash": "dd034466ac07bd45ab9b4041c840d05d",
+      "lastModificationDate": 1775702155589,
+      "contentHash": "f0e053190787404ad085a2ffd358fb43",
       "sourceName": "contracts/diamond/facets/OpenDIDVcFacet.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -1607,9 +502,129 @@
         "OpenDIDVcFacet"
       ]
     },
+    "/workspaces/did-besu-contract/contracts/diamond/facets/OpenDIDDidStatusFacet.sol": {
+      "lastModificationDate": 1775707966959,
+      "contentHash": "0cf76d5d1a5c016a1e5828b49b2a74a4",
+      "sourceName": "contracts/diamond/facets/OpenDIDDidStatusFacet.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../libraries/LibAppStorage.sol",
+        "../../data/DocumentLibrary.sol",
+        "../../data/RoleLibrary.sol",
+        "../../utils/StringUtils.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "OpenDIDDidStatusFacet"
+      ]
+    },
+    "/workspaces/did-besu-contract/contracts/utils/StringUtils.sol": {
+      "lastModificationDate": 1775702423767,
+      "contentHash": "b1e91b31081a9a8f2e2b063d7e2f3041",
+      "sourceName": "contracts/utils/StringUtils.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "StringUtils"
+      ]
+    },
+    "/workspaces/did-besu-contract/contracts/diamond/facets/OpenDIDDidDocFacet.sol": {
+      "lastModificationDate": 1775707948526,
+      "contentHash": "7c5290487d6cc1a52d4c38d15332e002",
+      "sourceName": "contracts/diamond/facets/OpenDIDDidDocFacet.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../libraries/LibAppStorage.sol",
+        "../../data/DocumentLibrary.sol",
+        "../../data/RoleLibrary.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "OpenDIDDidDocFacet"
+      ]
+    },
     "/workspaces/did-besu-contract/contracts/diamond/facets/OpenDIDAdminFacet.sol": {
-      "lastModificationDate": 1775611561376,
-      "contentHash": "e4bbab753a2736bcdc23754f26e5a7e2",
+      "lastModificationDate": 1775702155589,
+      "contentHash": "184b6dd6b72fb1b790903e4cd7f13172",
       "sourceName": "contracts/diamond/facets/OpenDIDAdminFacet.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -1648,8 +663,8 @@
       ]
     },
     "/workspaces/did-besu-contract/contracts/diamond/OpenDIDInit.sol": {
-      "lastModificationDate": 1775611561373,
-      "contentHash": "4062e139d43a8f87312e8f8bb4fb5c3d",
+      "lastModificationDate": 1775702405188,
+      "contentHash": "cb322a428ecdf9d1bb9caa22b6f7be75",
       "sourceName": "contracts/diamond/OpenDIDInit.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -1688,7 +703,7 @@
       ]
     },
     "/workspaces/did-besu-contract/contracts/diamond/Diamond.sol": {
-      "lastModificationDate": 1775611561372,
+      "lastModificationDate": 1775700654447,
       "contentHash": "0a41707b16d45096915522691d13d332",
       "sourceName": "contracts/diamond/Diamond.sol",
       "solcConfig": {
@@ -1727,45 +742,8 @@
         "Diamond"
       ]
     },
-    "/workspaces/did-besu-contract/contracts/diamond/interfaces/IDiamondCut.sol": {
-      "lastModificationDate": 1775611561372,
-      "contentHash": "eb96d0aa0cef16e17596d25e46e5bba0",
-      "sourceName": "contracts/diamond/interfaces/IDiamondCut.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "IDiamondCut"
-      ]
-    },
     "/workspaces/did-besu-contract/contracts/diamond/libraries/LibDiamond.sol": {
-      "lastModificationDate": 1775611561372,
+      "lastModificationDate": 1775702166091,
       "contentHash": "19ed4a38f0e5162e45727070ec376880",
       "sourceName": "contracts/diamond/libraries/LibDiamond.sol",
       "solcConfig": {
@@ -1803,10 +781,10 @@
         "LibDiamond"
       ]
     },
-    "/workspaces/did-besu-contract/contracts/diamond/facets/DiamondCutFacet.sol": {
-      "lastModificationDate": 1775611561373,
-      "contentHash": "e6e1e835e8af3d7b725587b6f83445fa",
-      "sourceName": "contracts/diamond/facets/DiamondCutFacet.sol",
+    "/workspaces/did-besu-contract/contracts/diamond/interfaces/IDiamondCut.sol": {
+      "lastModificationDate": 1775700654449,
+      "contentHash": "eb96d0aa0cef16e17596d25e46e5bba0",
+      "sourceName": "contracts/diamond/interfaces/IDiamondCut.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -1832,19 +810,16 @@
           }
         }
       },
-      "imports": [
-        "../interfaces/IDiamondCut.sol",
-        "../libraries/LibDiamond.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         "^0.8.27"
       ],
       "artifacts": [
-        "DiamondCutFacet"
+        "IDiamondCut"
       ]
     },
     "/workspaces/did-besu-contract/contracts/diamond/facets/OwnershipFacet.sol": {
-      "lastModificationDate": 1775611561373,
+      "lastModificationDate": 1775700654448,
       "contentHash": "ab293acb9472ce4f5c55c699e7bc6d2b",
       "sourceName": "contracts/diamond/facets/OwnershipFacet.sol",
       "solcConfig": {
@@ -1884,7 +859,7 @@
       ]
     },
     "/workspaces/did-besu-contract/contracts/diamond/interfaces/IERC173.sol": {
-      "lastModificationDate": 1775611561372,
+      "lastModificationDate": 1775700654449,
       "contentHash": "c956c1a7c6741c0c96556e60640839ff",
       "sourceName": "contracts/diamond/interfaces/IERC173.sol",
       "solcConfig": {
@@ -1921,7 +896,7 @@
       ]
     },
     "/workspaces/did-besu-contract/contracts/diamond/facets/DiamondLoupeFacet.sol": {
-      "lastModificationDate": 1775611561373,
+      "lastModificationDate": 1775700654448,
       "contentHash": "54b8027016f3f1a8fc91fcb0b2c68048",
       "sourceName": "contracts/diamond/facets/DiamondLoupeFacet.sol",
       "solcConfig": {
@@ -1961,7 +936,7 @@
       ]
     },
     "/workspaces/did-besu-contract/contracts/diamond/interfaces/IDiamondLoupe.sol": {
-      "lastModificationDate": 1775611561372,
+      "lastModificationDate": 1775700654449,
       "contentHash": "9b6723e21ecf86b575ab0b1db926d2de",
       "sourceName": "contracts/diamond/interfaces/IDiamondLoupe.sol",
       "solcConfig": {
@@ -1995,6 +970,46 @@
       ],
       "artifacts": [
         "IDiamondLoupe"
+      ]
+    },
+    "/workspaces/did-besu-contract/contracts/diamond/facets/DiamondCutFacet.sol": {
+      "lastModificationDate": 1775700654448,
+      "contentHash": "e6e1e835e8af3d7b725587b6f83445fa",
+      "sourceName": "contracts/diamond/facets/DiamondCutFacet.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/IDiamondCut.sol",
+        "../libraries/LibDiamond.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "DiamondCutFacet"
       ]
     }
   }

@@ -1,5 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomicfoundation/hardhat-ethers");
+require("hardhat-contract-sizer");
 const path = require("path");
 const fs = require("fs");
 const { task } = require("hardhat/config");

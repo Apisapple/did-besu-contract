@@ -8,34 +8,6 @@ function getSelectors(contract) {
 
 async function deployContract() {
     try {
-        const DocumentStorage = await ethers.getContractFactory(
-            "DocumentStorage",
-        );
-        const documentStorage = await DocumentStorage.deploy();
-        const documentStorageAddress = await documentStorage.getAddress();
-        console.log("DocumentStorage deployed to:", documentStorageAddress);
-
-        const VcMetaStorage = await ethers.getContractFactory(
-            "VcMetaStorage",
-        );
-        const vcMetaStorage = await VcMetaStorage.deploy();
-        const vcMetaStorageAddress = await vcMetaStorage.getAddress();
-        console.log("VcMetaStorage deployed to:", vcMetaStorageAddress);
-
-        const ZKPStorage = await ethers.getContractFactory(
-            "ZKPStorage",
-        );
-        const zkpStorage = await ZKPStorage.deploy();
-        const zkpStorageAddress = await zkpStorage.getAddress();
-        console.log("ZKPStorage deployed to:", zkpStorageAddress);
-
-        const MultibaseContract = await ethers.getContractFactory(
-            "MultibaseContract",
-        )
-        const multibaseContract = await MultibaseContract.deploy();
-        const multibaseContractAddress = await multibaseContract.getAddress();
-        console.log("MultibaseContract deployed to:", multibaseContractAddress);
-
         const DiamondCutFacet = await ethers.getContractFactory("DiamondCutFacet");
         const diamondCutFacet = await DiamondCutFacet.deploy();
         await diamondCutFacet.waitForDeployment();
@@ -56,7 +28,8 @@ async function deployContract() {
             "DiamondLoupeFacet",
             "OwnershipFacet",
             "OpenDIDAdminFacet",
-            "OpenDIDDidFacet",
+            "OpenDIDDidDocFacet",
+            "OpenDIDDidStatusFacet",
             "OpenDIDVcFacet",
             "OpenDIDZKPFacet",
         ];
@@ -79,10 +52,6 @@ async function deployContract() {
         await openDIDInit.waitForDeployment();
 
         const initCalldata = openDIDInit.interface.encodeFunctionData("init", [
-            documentStorageAddress,
-            vcMetaStorageAddress,
-            zkpStorageAddress,
-            multibaseContractAddress,
             owner.address,
         ]);
 
